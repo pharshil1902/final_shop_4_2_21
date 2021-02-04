@@ -237,7 +237,22 @@ def increment_odc():
 @app.route('/special_operator')
 def special_operator():
 	d=['','','']
-	return render_template("operator.html",data="0",d=d)
+	try:
+		conn =  mysql.connector.connect(host='13.240.20.12',user='operator1',passwd='operator1',database='sys')
+		curr = conn.cursor()
+		
+		a = ['size','media','color','duplex','add_ser']
+		size = []
+		for i in a:
+			sql_create = f""" SELECT * FROM {i};"""
+			curr.execute(sql_create)
+			dis = curr.fetchall()
+			size.append(dis)
+			
+		print(size)
+		return render_template("operator.html", size=size, data="0",d=d)
+	except:
+		return redirect(url_for('/logout'))	
 
 @app.route('/open_database_op',methods=['POST','GET'])
 def open_database_op():
@@ -260,7 +275,23 @@ def open_database_op():
 			except Exception as err:	
 				flash('Admin Database Not Connected')
 				print(err)
-				return render_template("operator.html")
+				try:
+					conn =  mysql.connector.connect(host='13.240.20.12',user='operator1',passwd='operator1',database='sys')
+					curr = conn.cursor()
+					
+					a = ['size','media','color','duplex','add_ser']
+					size = []
+					for i in a:
+						sql_create = f""" SELECT * FROM {i};"""
+						curr.execute(sql_create)
+						dis = curr.fetchall()
+						size.append(dis)
+			
+					print(size)
+					return render_template("operator.html", size=size, data="0",d=d)
+				except:
+					return redirect(url_for('/logout'))	
+			
 			
 		else:
 			flash('Not logged in!')
@@ -282,7 +313,23 @@ def operator():
 		
 		flash('Welcome '+str(ip_list[str(request.remote_addr)])+"!")
 		d=['','','']
-		return render_template("operator.html",data="0",d=d)
+		try:
+			conn =  mysql.connector.connect(host='13.240.20.12',user='operator1',passwd='operator1',database='sys')
+			curr = conn.cursor()
+			
+			a = ['size','media','color','duplex','add_ser']
+			size = []
+			for i in a:
+				sql_create = f""" SELECT * FROM {i};"""
+				curr.execute(sql_create)
+				dis = curr.fetchall()
+				size.append(dis)
+				
+			print(size)
+			return render_template("operator.html", size=size, data="0",d=d)
+		except Exception as err:
+			print(err)
+			return redirect(url_for('/logout'))	
 	else:
 		flash('wrong password!')
 		return render_template('operator_login.html')
@@ -372,11 +419,42 @@ def adding_job_operator():
 					conn.commit()
 					flash('Entry Submitted!')
 					d=[cn,mobile,dn]
-					return render_template("operator.html",data=str(int(request.form.get('choice'))+1),d=d)
+					try:
+						conn =  mysql.connector.connect(host='13.240.20.12',user='operator1',passwd='operator1',database='sys')
+						curr = conn.cursor()
+						
+						a = ['size','media','color','duplex','add_ser']
+						size = []
+						for i in a:
+							sql_create = f""" SELECT * FROM {i};"""
+							curr.execute(sql_create)
+							dis = curr.fetchall()
+							size.append(dis)
+							
+						print(size)
+						return render_template("operator.html", size=size, data=str(int(request.form.get('choice'))+1),d=d)
+					except:
+						return redirect(url_for('/logout'))	
 				except Exception as err:
 					print("error while inserting data:", err)
 					flash("Error while inserting data!")
-					return render_template("operator.html",data=str(int(request.form.get('choice'))),d=d)
+					try:
+						conn =  mysql.connector.connect(host='13.240.20.12',user='operator1',passwd='operator1',database='sys')
+						curr = conn.cursor()
+						
+						a = ['size','media','color','duplex','add_ser']
+						size = []
+						for i in a:
+							sql_create = f""" SELECT * FROM {i};"""
+							curr.execute(sql_create)
+							dis = curr.fetchall()
+							size.append(dis)
+							
+						print(size)
+						return render_template("operator.html", size=size, data=str(int(request.form.get('choice'))),d=d)
+					except:
+						return redirect(url_for('/logout'))
+
 				
 		else:
 			flash('You are not logged in!')
@@ -388,7 +466,22 @@ def adding_job_operator():
 	except Exception:
 			flash('Error Occured!')
 			return  redirect(url_for('special_operator'))
-	return 	render_template("operator.html",data="0",d=d)	
+	try:
+			conn =  mysql.connector.connect(host='13.240.20.12',user='operator1',passwd='operator1',database='sys')
+			curr = conn.cursor()
+			
+			a = ['size','media','color','duplex','add_ser']
+			size = []
+			for i in a:
+				sql_create = f""" SELECT * FROM {i};"""
+				curr.execute(sql_create)
+				dis = curr.fetchall()
+				size.append(dis)
+				
+			print(size)
+			return render_template("operator.html", size=size, data="0",d=d)
+	except:
+			return redirect(url_for('/logout'))			
 
 
 @app.route('/operator_submit',methods=['POST'])	
@@ -461,7 +554,7 @@ def logout():
 	
 if __name__ == "__main__":
 	
-	app.run(debug=True,host="13.240.20.251", port=5000,threaded=True,use_reloader=False)
+	app.run(debug=True,host="127.0.0.1", port=5000,threaded=True,use_reloader=False)
 	
 
 	#app.run(debug=False,host="127.0.0.1", port=5000, threaded=False,use_reloader=False)

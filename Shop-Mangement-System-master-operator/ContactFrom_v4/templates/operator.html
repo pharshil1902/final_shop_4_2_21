@@ -184,19 +184,9 @@
 				<div>
 					<select required class="custom-select" style="width: 200px; border-color: black;" required name="size" id="sz" onclick="on_click_custom_size()">
 						<option value="" >None</option>
-					<option >	A4</option>
-						<option>Legal</option>
-							<option>A3</option>
-								<option>12 X 18</option>
-									<option>13 X 19</option>
-	<option>89 X 52 mm</option>
-										<option>A2</option>
-											<option>13 X 26</option>
-												<option>13 X 30</option>
-													<option>13 X 40</option>
-														<option>A1</option>
-															<option>A0 </option>
-															
+						{% for x in size[0] %}
+						<option> {{x[0]}} </option>
+						{% endfor %}		
 															
 						
 
@@ -234,71 +224,9 @@
 				<div>
 					<select class="custom-select" style="width: 200px; border-color: black;"required name="type" id="media">
 						<option value="">None</option>
-						<option >Normal paper</option>
-						<option >130gsm</option>
-						<option >170gsm</option>
-						<option >210gsm</option>
-						<option >250gsm</option>
-						<option >300gsm</option>
-						<option >350gsm</option>
-						<option >400gsm</option>
-					     <option >Ivery Kent</option>
-						<option >Master</option>
-						<option >FBB</option>
-						<option >Sticker</option>
-						<option >White Hibond</option>
-						<option >Avery Hibond</option>
-						<option >Normal Hibond</option>
-						<option >Avery Sticker</option>
-						<option >Silver Sticker</option>
-						<option >Silver Mettalic Sticker</option>
-						<option >Silver Mettalic Card</option>
-						<option >Golden Texture Card</option>
-
-
-					<option >A4 Bill Book (1+1)</option>
-<option >A4 Bill Book (1+2)</option>
-<option >A5 Bill Book (1+1)</option>
-<option >A5 Bill Book (1+2)</option>
-						<option >Smart Card</option>
-
-						<option >Golden Dark Sticker</option>
-						<option >Opaque Sticker</option>
-						<option >Transparent Sticker</option>
-						<option >Opaque Matte Sticker</option>
-						<option >OHP</option>
-						<option >Texture 326</option>
-						<option >Texture Dot</option>
-						<option >Texture Golden Dark</option>
-						<option >Texture Golden Light</option>
-						<option >Texture 328</option>
-						<option >Texture White Normal</option>
-						<option >Texture 374</option>
-						<option >Texture Building Constrn</option>
-						<option >NT Regular</option>
-						<option >NT 275um</option>
-						<option >LPF</option>
-						<option >CD Sticker</option>
-						<option >2" Round Die</option>
-						<option >2.5 Round Die</option>
-						<option >3" Round Die</option>
-						<option >3.5" Round Die</option>
-						<option >4" Round Die</option>
-						<option >5" Round Die </option>
-						<option >Tracing Paper</option>
-						<option >Photo Gloss</option>
-						<option >Lager Paper</option>
-						<option >Flex</option>
-						<option >Vinyl</option>
-						<option >Eco Vinyl</option>
-						<option >Standae</option>
-						
-						<option >2" Round Opaque Die</option>
-						<option >2.5" Round Opaque Die</option>
-						<option >3" Round Opaque Die</option>
-						<option >3.5" Round Opaque Die</option>
-						
-
+						{% for x in size[1] %}
+							<option> {{x[0]}} </option>
+						{% endfor %}
 					</select>
 				</div>
 				<span class="focus-input100"></span>
@@ -309,9 +237,9 @@
 				<div>
 					<select class="custom-select" style="width: 200px; border-color: black;" required name="color" id="color">
 						<option value="" >None</option>
-						<option>Black/White</option>
-						<option>Single-Color</option>
-						<option>Multi-Color</option>
+						{% for x in size[2] %}
+							<option> {{x[0]}} </option>
+						{% endfor %}
 						
 					
 					</select>
@@ -323,8 +251,9 @@
 				<div>
 					<select class="custom-select" style="width: 200px; border-color: black;"required name="duplex">
 						<option selected>None</option>
-						<option>Single-side</option>
-						<option>Front-and-Back</option>
+						{% for x in size[3] %}
+							<option> {{x[0]}} </option>
+						{% endfor %}
 					
 					</select>
 				</div>
@@ -392,26 +321,9 @@
 						<select class="custom-select" style="width: 200px; border-color: black;" name="add_service" id="add_s">
 							
 							<option selected>None</option>
-							<option>Lamination Hot </option>
-							<option>Lamination Cold Gloss</option>
-								<option>Lamiation Cold Matte</option>
-									<option>Spiral Binding</option>
-										<option>Wiro Binding</option>
-											<option>Hard Binding</option>
-												<option>Pad Binding</option>
-													<option>Pasting Binding</option>
-														<option>Pasting Binding with Cover</option>
-															<option>Round Corner Cutting</option>
-																<option>Round Cutting</option>
-																	<option>Cutting</option>
-																		<option>Punching</option>
-																			<option>Center pinning</option>
-																				<option>Designing</option>
-																					<option>Editing</option>
-																						<option>Logo Designing
-																							<option>Colour correction for Gold/Silver</option>
-																								<option>Banner Revet</option>
-
+							{% for x in size[4] %}
+							<option> {{x[0]}} </option>
+							{% endfor %}
 							
 						</select>
 					</div>

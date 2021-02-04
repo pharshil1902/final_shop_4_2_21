@@ -59,7 +59,24 @@ def back_to_homepage():
 @app.route('/special_admin')
 def special_admin():
 	d=['','','']
-	return render_template("admin.html",data="0",d=d)
+	try:
+		conn =  mysql.connector.connect(host='13.240.20.12',user='root',passwd='1902',database='sys')
+		curr = conn.cursor()
+		
+		a = ['size','media','color','duplex','add_ser']
+		size = []
+		for i in a:
+			sql_create = f""" SELECT * FROM {i};"""
+			curr.execute(sql_create)
+			dis = curr.fetchall()
+			size.append(dis)
+
+		print(size)
+		return render_template("admin.html",size=size,data="0",d=d)
+	except:
+		return redirect(url_for('/logout_admin'))
+
+	
 
 @app.route('/open_gst')
 def open_gstt():
@@ -117,7 +134,21 @@ def admin():
 		flash('Welcome '+str(admin_name)+"!")
 		session['logged_in_admin'] = True
 		d=['','','']
-		return render_template("admin.html",data="0",d=d)
+		try:
+			conn =  mysql.connector.connect(host='13.240.20.12',user='root',passwd='1902',database='sys')
+			curr = conn.cursor()
+			a = ['size','media','color','duplex','add_ser']
+			size = []
+			for i in a:
+				sql_create = f""" SELECT * FROM {i};"""
+				curr.execute(sql_create)
+				dis = curr.fetchall()
+				size.append(dis)
+
+			print(size)
+			return render_template("admin.html",size=size,data="0",d=d)
+		except:
+			return render_template("admin_logon.html")
 	else:
 		flash('wrong password!')
 		print("wrong")
@@ -713,7 +744,22 @@ def database_open():
 				flash('Admin Database Not Connected')
 				print(err)
 				d=['','','']
-				return render_template("admin.html",data="0",d=d)
+				try:
+					conn =  mysql.connector.connect(host='13.240.20.12',user='root',passwd='1902',database='sys')
+					curr = conn.cursor()
+					a = ['size','media','color','duplex','add_ser']
+					size = []
+					for i in a:
+						sql_create = f""" SELECT * FROM {i};"""
+						curr.execute(sql_create)
+						dis = curr.fetchall()
+						size.append(dis)
+
+					print(size)
+					return render_template("admin.html",size=size,data="0",d=d)
+				except:
+					return redirect(url_for('logout_admin'))	
+				
 			
 		else:
 			flash('Not logged in!')
@@ -788,7 +834,22 @@ def admin_submit():
 			except Exception as err:
 				print("error while inserting data:", err)
 				flash("Error while inserting data!")
-				return render_template("admin.html",data="0",d=d)
+				try:
+					conn =  mysql.connector.connect(host='13.240.20.12',user='root',passwd='1902',database='sys')
+					curr = conn.cursor()
+					a = ['size','media','color','duplex','add_ser']
+					size = []
+					for i in a:
+						sql_create = f""" SELECT * FROM {i};"""
+						curr.execute(sql_create)
+						dis = curr.fetchall()
+						size.append(dis)
+
+					print(size)
+					return render_template("admin.html",size=size,data="0",d=d)
+				except:
+					return redirect(url_for('logout_admin'))	
+				
 		else:
 			flash('You are not logged in!')
 			return redirect(url_for('admin_log'))	
@@ -859,12 +920,39 @@ def adding_job():
 					conn.commit()
 					flash('Entry Submitted!')
 					d=[cn,mobile,dn]
-					
-					return render_template("admin.html",data=str(int(request.form.get('choice'))+1),d=d)
+					try:
+						conn =  mysql.connector.connect(host='13.240.20.12',user='root',passwd='1902',database='sys')
+						curr = conn.cursor()
+						a = ['size','media','color','duplex','add_ser']
+						size = []
+						for i in a:
+							sql_create = f""" SELECT * FROM {i};"""
+							curr.execute(sql_create)
+							dis = curr.fetchall()
+							size.append(dis)
+
+						print(size)
+						return render_template("admin.html",size=size,data=str(int(request.form.get('choice'))+1),d=d)
+					except:
+						return redirect(url_for('logout_admin'))	
 				except Exception as err:
 					print("error while inserting data:", err)
 					flash("Error while inserting data!")
-					return render_template("admin.html",data=str(int(request.form.get('choice'))),d=d)
+					try:
+						conn =  mysql.connector.connect(host='13.240.20.12',user='root',passwd='1902',database='sys')
+						curr = conn.cursor()
+						a = ['size','media','color','duplex','add_ser']
+						size = []
+						for i in a:
+							sql_create = f""" SELECT * FROM {i};"""
+							curr.execute(sql_create)
+							dis = curr.fetchall()
+							size.append(dis)
+
+						print(size)
+						return render_template("admin.html",size=size,data=str(int(request.form.get('choice'))),d=d)
+					except:
+						return redirect(url_for('logout_admin'))
 				
 		else:
 			flash('You are not logged in!')
@@ -873,13 +961,42 @@ def adding_job():
 	except Exception:
 			flash('Error Occured!')
 			return  redirect(url_for('special_admin'))
-	return 	render_template("admin.html",data="0",d=d)	
+	try:
+		conn =  mysql.connector.connect(host='13.240.20.12',user='root',passwd='1902',database='sys')
+		curr = conn.cursor()
+		a = ['size','media','color','duplex','add_ser']
+		size = []
+		for i in a:
+			sql_create = f""" SELECT * FROM {i};"""
+			curr.execute(sql_create)
+			dis = curr.fetchall()
+			size.append(dis)
+
+		print(size)
+		return render_template("admin.html",size=size,data="0",d=d)
+	except:
+		return redirect(url_for('logout_admin'))	
+							
 
 @app.route('/back_to_admin',methods=['POST'])
 def back_to_admin():		
 		d=['','','']
-		return render_template('admin.html',data="0",d=d)
+		try:
+				conn =  mysql.connector.connect(host='13.240.20.12',user='root',passwd='1902',database='sys')
+				curr = conn.cursor()
+				a = ['size','media','color','duplex','add_ser']
+				size = []
+				for i in a:
+					sql_create = f""" SELECT * FROM {i};"""
+					curr.execute(sql_create)
+					dis = curr.fetchall()
+					size.append(dis)
 
+				print(size)
+				return render_template("admin.html",size=size,data="0",d=d)
+		except:
+				return redirect(url_for('logout_admin'))	
+				
 
 @app.route('/print_delivery_ad_m',methods=['POST'])
 def print_delivery_ad_m(): # WORKING ONE
