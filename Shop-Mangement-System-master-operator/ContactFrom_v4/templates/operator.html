@@ -1,0 +1,602 @@
+
+<!--{% block page_content %}-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Shop Management System</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='shop--v3.ico') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+<script>
+	if ( window.history.replaceState ) { 
+        window.history.replaceState( null, null, window.location.href ); 
+    } 
+
+</script>
+	<meta charset="UTF-8">
+	<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<!-- <link rel="icon" type="image/png" href="images/icons/favicon.ico"/> -->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }} ">
+	
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome.min.css') }}" >
+<!--===============================================================================================fonts/font-awesome-4.7.0/css/font-awesome.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='animate.css') }}">
+<!--===============================================================================================vendor/animate/animate.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='hamburgers.min.css') }}">
+<!--===============================================================================================vendor/css-hamburgers/hamburgers.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='animsition.min.css') }}">
+<!--===============================================================================================vendor/animsition/css/animsition.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='select2.min.css') }}">
+<!--===============================================================================================vendor/select2/select2.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='daterangepicker.css') }}">
+<!--===============================================================================================vendor/daterangepicker/daterangepicker.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='util.css') }}">
+	<!--css/util.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+	<script src="{{ url_for('static', filename='popper.js') }}"></script>
+	<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Regular.ttf') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Medium.ttf') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Bold.ttf') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-SemiBold.ttf') }}">
+	<!--css/main.css-->
+	<script src="{{ url_for('static', filename='actions.js') }}"></script>
+	<style>
+		
+@font-face {
+  font-family: Poppins-Regular;
+  src:url('../static/Poppins-Regular.ttf') ;  /*url('../fonts/poppins/Poppins-Regular.ttf');*/
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src:url('../static/Poppins-Medium.ttf');/*"{{ url_for('static', filename='Poppins-Medium.ttf') }}" url('../fonts/poppins/Poppins-Medium.ttf');*/
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src:url('../static/Poppins-Bold.ttf');
+  /*  "{{ url_for('static', filename='Poppins-Bold.ttf') }}"   url_for('../fonts/poppins/Poppins-Bold.ttf'); */
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src:url('../static/Poppins-SemiBold.ttf');
+  /*   "{{ url_for('static', filename='Poppins-SemiBold.ttf') }}"  url('../fonts/poppins/Poppins-SemiBold.ttf'); */
+}
+
+	</style>
+<!--===============================================================================================actions.js-->
+</head>
+<body>
+
+<script>
+	function calculate_amt(){
+						var qty = document.getElementById("qty");
+						var rate = document.getElementById("rate");
+						
+						let sum  = Number(qty)*Number(rate);
+						document.getElementById("amt").innerHTML = "45";
+					}
+	var ress = []
+	$(document).ready(function(){
+		$("#c_name").on("input",function(e){
+			textinlivebox = $("#c_name").val();
+			$.ajax({
+				method:"post",
+				url:"/livesearch",
+				data:{text:textinlivebox},
+				success:function(res){
+					ress = res
+					console.log(res[0]);
+					var options = ""
+					for(var i = 0; i < res[0].length; i++){
+						options += '<option value="' + res[0][i] + '"/>';
+					}
+					document.getElementById('cname').innerHTML = options;
+				},
+				
+			})
+		});
+	})
+	function c_name_wise_details(){
+		var cname = document.getElementById('c_name').value
+		for(var i = 0; i < ress[0].length; i++){
+			if(cname === ress[0][i])
+				document.getElementById('mobile').value = ress[1][i];
+		}
+	}
+</script>
+	<div class="container-contact100" align="center">
+		<div class="container-contact100" align="center" style="zoom: 0.82;">
+			<div align:center style=" position: fixed;top: 15px;left: 5;width: 80%; " >
+			{% with messages = get_flashed_messages() %}
+				{% if messages %}
+					{% for message in messages %}
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<span><strong>{{ message }}</strong></span>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+					  </div>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+		</div>
+		<form class="contact100-form validate-form" id="main_frm" style="zoom: 1.0;" style="height: 300px;"  method="POST" >
+			<!--  height: 900px;   -->
+		
+			<span class="contact100-form-title" style="color:beige"    >
+				<!--- style="position: absolute;top:35px;left: 650px;" -->
+				Madhu Copy Centre
+			</span>
+			
+			
+				<!-- style="position: absolute;top:100px;left: 130px;height: 850px;"    -->
+			<div class="wrap-input100 validate-input wrap-contact100" style="float: left; width: 450px;height: 150px;">
+				<span class="label-input100">Company Name</span>
+				<input class="input100" list="cname" onchange="c_name_wise_details()" type="text" name="c_name" id="c_name" value="{{d[0]}}" required placeholder="Enter Company Name">
+				<datalist id="cname">
+					<option value=""></option>
+
+				</datalist>
+				<span class="focus-input100"></span>
+			</div>
+		
+			<div class="wrap-input100 validate-input wrap-contact100" style="float: left;width: 400px;height: 150px;display:none" >
+				<span class="label-input100" style="display:none">Name of Delivery</span>
+				<input class="input100" type="text" name="delivery" id="d_name" value="{{d[2]}}" required placeholder="Enter Delivery Man Name" style="display:none">
+				<span class="focus-input100"></span>
+			</div>
+			<div class="wrap-input100 validate-input wrap-contact100" style="float: left;width: 400px;height: 150px;">
+				<span class="label-input100">Mobile Number</span>
+				<input class="input100" type="text" name="mobile" id="mobile" value="{{d[1]}}" pattern="[1-9]{1}[0-9]{9}" required placeholder="Enter Mobile Number">
+				<span class="focus-input100"></span>
+			</div>
+			<div class="wrap-input100 validate-input wrap-contact100" style="float: left;width: 400px;height: 150px;"  >
+				<span class="label-input100"  >Description</span> 
+				<textarea class="input100" name="message"  placeholder="Write Description here...">None</textarea>
+				<span class="focus-input100" ></span>
+			</div>
+	
+		
+			<div class="wrap-input100 validate-input wrap-contact100" style="float: left;width: 450px;height: 150px;" >
+				<span class="label-input100">If you want to ADD CUSTOM SIZE:</span> 
+				<input class="input100" name="xyz" id="cus_size" type="text" placeholder="Enter Custom Size Here"></input>
+				<span><button class="btn btn-outline-dark" type="button" onclick="new_cus_size()" >ADD SIZE</button></span>
+				<span class="focus-input100"></span>
+			</div>
+			
+			<style>
+				select:focus{
+					border: 2px solid;
+					
+					border-color: black;
+				}
+				
+			</style>
+			<div class="wrap-input100 input100-select wrap-contact100" style="float: left;width: 400px;height: 150px;" >
+				<span class="label-input100">Size</span>
+				<div>
+					<select required class="custom-select" style="width: 200px; border-color: black;" required name="size" id="sz" onclick="on_click_custom_size()">
+						<option value="" >None</option>
+					<option >	A4</option>
+						<option>Legal</option>
+							<option>A3</option>
+								<option>12 X 18</option>
+									<option>13 X 19</option>
+	<option>89 X 52 mm</option>
+										<option>A2</option>
+											<option>13 X 26</option>
+												<option>13 X 30</option>
+													<option>13 X 40</option>
+														<option>A1</option>
+															<option>A0 </option>
+															
+															
+						
+
+						
+					</select>
+				</div>
+				<span class="focus-input100"></span>
+				
+			</div>
+	
+			<script>
+				function new_cus_size(){
+					var sel = document.getElementById('sz');
+					var opt = document.createElement('option');
+					var op =  document.getElementById('cus_size').value;
+				
+					opt.text = op;
+					sel.add(opt); 
+				}
+				function new_cus_size_add(){
+					var sel = document.getElementById('add_sz');
+					var opt = document.createElement('option');
+					var op =  document.getElementById('cus_size_add').value;
+				
+					opt.text = op;
+					sel.add(opt); 
+				}
+
+			</script>
+				
+			
+					<!--  style="position: absolute;top:100px;left: 650px;"  -->
+			<div class="wrap-input100 input100-select wrap-contact100" style="float: left;width: 400px;height: 150px;" >
+				<span class="label-input100">Media-Type</span>
+				<div>
+					<select class="custom-select" style="width: 200px; border-color: black;"required name="type" id="media">
+						<option value="">None</option>
+						<option >Normal paper</option>
+						<option >130gsm</option>
+						<option >170gsm</option>
+						<option >210gsm</option>
+						<option >250gsm</option>
+						<option >300gsm</option>
+						<option >350gsm</option>
+						<option >400gsm</option>
+					     <option >Ivery Kent</option>
+						<option >Master</option>
+						<option >FBB</option>
+						<option >Sticker</option>
+						<option >White Hibond</option>
+						<option >Avery Hibond</option>
+						<option >Normal Hibond</option>
+						<option >Avery Sticker</option>
+						<option >Silver Sticker</option>
+						<option >Silver Mettalic Sticker</option>
+						<option >Silver Mettalic Card</option>
+						<option >Golden Texture Card</option>
+
+
+					<option >A4 Bill Book (1+1)</option>
+<option >A4 Bill Book (1+2)</option>
+<option >A5 Bill Book (1+1)</option>
+<option >A5 Bill Book (1+2)</option>
+						<option >Smart Card</option>
+
+						<option >Golden Dark Sticker</option>
+						<option >Opaque Sticker</option>
+						<option >Transparent Sticker</option>
+						<option >Opaque Matte Sticker</option>
+						<option >OHP</option>
+						<option >Texture 326</option>
+						<option >Texture Dot</option>
+						<option >Texture Golden Dark</option>
+						<option >Texture Golden Light</option>
+						<option >Texture 328</option>
+						<option >Texture White Normal</option>
+						<option >Texture 374</option>
+						<option >Texture Building Constrn</option>
+						<option >NT Regular</option>
+						<option >NT 275um</option>
+						<option >LPF</option>
+						<option >CD Sticker</option>
+						<option >2" Round Die</option>
+						<option >2.5 Round Die</option>
+						<option >3" Round Die</option>
+						<option >3.5" Round Die</option>
+						<option >4" Round Die</option>
+						<option >5" Round Die </option>
+						<option >Tracing Paper</option>
+						<option >Photo Gloss</option>
+						<option >Lager Paper</option>
+						<option >Flex</option>
+						<option >Vinyl</option>
+						<option >Eco Vinyl</option>
+						<option >Standae</option>
+						
+						<option >2" Round Opaque Die</option>
+						<option >2.5" Round Opaque Die</option>
+						<option >3" Round Opaque Die</option>
+						<option >3.5" Round Opaque Die</option>
+						
+
+					</select>
+				</div>
+				<span class="focus-input100"></span>
+			</div>
+
+			<div class="wrap-input100 input100-select wrap-contact100" style="float: left;width: 400px;height: 150px;" >
+				<span class="label-input100">Color</span>
+				<div>
+					<select class="custom-select" style="width: 200px; border-color: black;" required name="color" id="color">
+						<option value="" >None</option>
+						<option>Black/White</option>
+						<option>Single-Color</option>
+						<option>Multi-Color</option>
+						
+					
+					</select>
+				</div>
+				<span class="focus-input100"></span>
+			</div>
+			<div class="wrap-input100 input100-select wrap-contact100" style="float: left;width: 450px;height: 150px;">
+				<span class="label-input100">Duplex</span>
+				<div>
+					<select class="custom-select" style="width: 200px; border-color: black;"required name="duplex">
+						<option selected>None</option>
+						<option>Single-side</option>
+						<option>Front-and-Back</option>
+					
+					</select>
+				</div>
+				<span class="focus-input100"></span>
+			</div>
+
+			<div class="wrap-input100 validate-input wrap-contact100" style="float: left;width: 400px;height: 150px;" >
+				<span class="label-input100">Quantity</span>
+				<input class="input100" type="number" required name="quantity"  id="qty"  placeholder="Enter Quantity">
+				<span class="focus-input100"></span>
+			</div>
+			<script>
+				function myFunction() {
+				  var checkBox = document.getElementById("addi");
+				  var text = document.getElementById("add");
+				  if (checkBox.checked == true){
+					text.style.display = "block";
+					document.getElementById("add_qty").required = true;
+					ocument.getElementById("add_qty").value = "";
+				  } else {
+					 text.style.display = "none";
+					document.getElementById("add_qty").required = false;
+					document.getElementById("add_qty").value = "0";
+				  }
+				}
+				
+			
+				</script>
+		
+		
+			<style>
+				input[type=checkbox]:focus{
+					outline: 2px solid black;
+				}
+			</style>
+		
+			<div  class="wrap-contact100" style="float: left;width: 450px;height: 150px;" >
+				<span class="label-input100"  style="zoom: 1.5;">Additional Services</span>
+				<input  type="checkbox"   style="zoom:1.5"  id="addi" name="hell" onclick="myFunction()">
+				
+			</div>
+			
+		
+	
+
+			<!--	<p class="label-input100" style="zoom: 1.5;display: none;" id="hello">hello</p>-->
+				
+				
+			
+			
+				
+		
+		
+		 
+		<div style="display: none;" name="hello"  id="add" style="float: left;"  >
+		<!-- height: 850px;position:absolute;top:95px;left: 1170px;   -->
+				
+		
+			
+
+				
+				<div class="wrap-input100 input100-select wrap-contact100" style="float: left;width: 400px;height: 150px;"  >
+					<span class="label-input100">Additional Service</span>
+					<div>
+						<select class="custom-select" style="width: 200px; border-color: black;" name="add_service" id="add_s">
+							
+							<option selected>None</option>
+							<option>Lamination Hot </option>
+							<option>Lamination Cold Gloss</option>
+								<option>Lamiation Cold Matte</option>
+									<option>Spiral Binding</option>
+										<option>Wiro Binding</option>
+											<option>Hard Binding</option>
+												<option>Pad Binding</option>
+													<option>Pasting Binding</option>
+														<option>Pasting Binding with Cover</option>
+															<option>Round Corner Cutting</option>
+																<option>Round Cutting</option>
+																	<option>Cutting</option>
+																		<option>Punching</option>
+																			<option>Center pinning</option>
+																				<option>Designing</option>
+																					<option>Editing</option>
+																						<option>Logo Designing
+																							<option>Colour correction for Gold/Silver</option>
+																								<option>Banner Revet</option>
+
+							
+						</select>
+					</div>
+					<span class="focus-input100"></span>
+				</div>
+				
+				
+				
+				<div class="wrap-input100 validate-input wrap-contact100" style="float: left;width: 450px;height:150px;">
+					<span class="label-input100">Quantity</span>
+					<input class="input100" type="number" name="add_qty"  id="add_qty"  >
+					<span class="focus-input100"></span>
+				</div>
+				
+				<div class="wrap-input100 validate-input wrap-contact100" style="float: left;width: 400px;height: 150px;"  >
+					<span class="label-input100"  >Remark</span> 
+					<textarea class="input100" name="add_remark"  placeholder="Write Remarks here...">None</textarea>
+					<span class="focus-input100" ></span>
+				</div>
+				
+
+		</div>
+		
+		
+	
+	
+	</div>
+	<input type="number" style="display: none;" name='choice' value="{{data}}"  ></input>
+	<style>
+		button:focus{
+			border-width: 2px;
+			border-color: black;
+		}
+		
+	</style>
+	
+	<script>
+		function val(){
+			if(document.getElementById('c_name').value.length > 0){
+				
+				if(document.getElementById('mobile').value.length == 10){
+					if(document.getElementById('sz').value != ""){
+						if(document.getElementById('media').value != ""){
+							if(document.getElementById('color').value != ""){
+								if(document.getElementById('qty').value > 0){
+
+											if(document.getElementById('addi').checked == false){
+												document.getElementById('main_frm').submit();
+											}
+											else{
+												if(document.getElementById('add_qty').value > 0){
+													document.getElementById('main_frm').submit();
+												}
+												else{
+													alert("Enter Additional Quantity");
+														document.getElementById('add_qty').focus();
+												}
+											}
+								}
+								else{
+									alert("Enter Quantity");
+									document.getElementById('qty').focus();
+								}
+							}
+							else{
+								alert("Enter Color");
+								document.getElementById('color').focus();
+							}
+						}
+						else{
+							alert("Enter Media Type");
+							document.getElementById('media').focus();
+						}
+					}
+					else{
+						alert("Enter Size");
+							document.getElementById('sz').focus();
+						}
+				}
+				else{
+					alert("Enter Mobile Number");
+							document.getElementById('mobile').focus();
+						}
+		}
+		else{
+			alert("Enter Company Name");
+							document.getElementById('c_name').focus();
+						}
+		}
+		function form_sub_val(){
+			document.getElementById('main_frm').action = '/operator_submit';
+			val();
+			
+		
+		}
+		function form_add_val(){
+			document.getElementById('main_frm').action = '/add_job_operator';
+			val();
+		}
+	</script>
+	
+
+	
+		<button class="btn btn-primary" style="height: 50px;"  onclick="form_add_val()"   type="button">
+			<span>
+				Add Job
+				
+			</span>
+		</button>
+	
+		
+				<button class="btn btn-primary"  onclick="form_sub_val()"   style="height: 50px;"  type="button">
+					<span>
+						Submit
+						
+					</span>
+				</button>
+	
+			
+	</form>
+		<form action="/logout" method="POST">
+			<button class="btn btn-primary"  style="height: 50px;"  type="submit">
+				<span>
+					Log Out
+					
+				</span>
+			</button>
+	    </form>
+
+	<form action="/open_database_op" method="POST">
+		<button class="btn btn-primary"  style="height: 50px;"  type="submit">
+			<span>
+				database
+				
+			</span>
+		</button>
+	</form>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+	<div id="dropDownSelect1"></div>
+	<script type = "text/javascript" 
+	src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+ </script>
+	<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='jquery-3.5.1.min.js') }}"></script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+<!--===============================================================================================vendor/jquery/jquery-3.2.1.min.js-->
+	<script src="{{ url_for('static', filename='animsition.min.js') }}"></script>
+<!--===============================================================================================vendor/animsition/js/animsition.min.js-->
+	
+<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+<!--==================================================================================vendor/bootstrap/js/bootstrap.min.js=============vendor/bootstrap/js/popper.js-->
+	<script src="{{ url_for('static', filename='select2.min.js') }}"></script>
+	<!--vendor/select2/select2.min.js-->
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='moment.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='daterangepicker.js') }}"></script>
+<!--=====================================================================vendor/daterangepicker/moment.min.js==========================vendor/daterangepicker/daterangepicker.js-->
+	<script src="{{ url_for('static', filename='countdowntime.js') }}"></script>
+<!--===============================================================================================vendor/countdowntime/countdowntime.js-->
+	<script src="{{ url_for('static', filename='main.js') }}"></script>
+	<!--js/main.js-->
+
+	<!-- Global site tag (gtag.js) - Google Analytics---https://www.googletagmanager.com/gtag/js?id=UA-23581568-13 -->
+	<link rel="stylesheet" href="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13">
+<script async src="{{ font_url }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>
+<!-- {% endblock %} -->

@@ -1,0 +1,153 @@
+<html  >
+    <head>
+        <title></title>
+        <script src="{{ url_for('static', filename='html2pdf.bundle.js') }}"></script>
+        <script src="{{ url_for('static', filename='html2canvas.js') }}"></script>
+        <script src="{{ url_for('static', filename='jspdf.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='es6-promise.auto.min.js') }}"></script>
+       
+        <script>
+            function edit_by(_id,data){
+                    document.getElementById(_id).innerHTML = data;   
+                }
+                function downloadimage() {
+            //var container = document.getElementById("image-wrap"); //specific element on page
+
+            var container = document.getElementById("bo"); // full page 
+
+            html2canvas(container).then(function(canvas) {
+               // const imgData = canvas.toDataURL('image/png');
+                var link = document.createElement("a");
+                document.body.appendChild(link);
+                link.download = "Order-Copy-{{ort}}.jpeg";
+                link.href = canvas.toDataURL('image/jpeg');
+                link.target = '_blank';
+                link.click();
+               // window.open(canvas.toDataURL('image/png'));
+                
+            });
+            }
+                window.onafterprint = function(){
+                   
+                  
+                document.getElementById('fmr').submit();
+           
+            }
+            
+
+        </script>
+    </head>
+    <form action="/increment_odc" method="POST" id="fmr"></form>
+   <style>
+       .watermark
+        {
+        position:fixed;
+        top:140px;
+        left:285px;
+        opacity:0.2;
+        z-index:99;
+        font-size: 30px;
+        color:lightslategrey;
+        transform: rotate(-20deg);
+        }
+   </style>
+        
+   <body  id="bo" >
+       <div class="watermark" >FOR SAMPLE</div>
+  
+    <style>
+        fieldset
+        {
+        border-radius:10px;
+        border-style: solid;
+        border-width: 3px;
+        max-width:300px;
+        height: 250px;
+        padding:16px;	
+        border-color: black;
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+        
+        @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chau+Philomene+One&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Signika:wght@700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');  
+    </style>
+      <div style="height: 80px ;width: 350px ;zoom: 0.8;padding-left: 250px;" >
+    <fieldset>
+        <center>
+    <p style="font-family: 'Chau Philomene One', sans-serif;font-size: 9px;height: 0px;top: 10px;left: 270px; position: fixed;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Ph.: 0265 - 2411964 ; 2413616  &nbsp;&nbsp;&nbsp;&nbsp; <strong style="font-size: 12px;">Order Copy</strong> </p>
+   
+    <p style="font-family: 'Chau Philomene One', sans-serif;font-size: 9px;height: 0px;top: 32px;left: 320px; position: fixed;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ( For Office Use Only )  &nbsp;&nbsp;&nbsp;&nbsp; </p>
+       
+    <div  >
+        <div  style="height: 0px;width:400px ;float: center;">
+            <table style="font-family: 'Signika', sans-serif;width: 100px;">
+                
+                <tr >
+                    <td  style="font-family: 'Signika', sans-serif;font-size: 12px;width: 100px;top: 70px;left: 293px; position: fixed;">Name: </td>
+                    <td><input style="font-size: 12px;border: 0px;top: 70px;left: 353px; position: fixed;width: 170px;" id="name" value="{{data[1]}}" disabled></input></td>
+                    <td style="font-size: 12px;width: 100px;top: 70px;left: 483px; position: fixed;" > No.
+                    <td><input style="font-size: 12px;border: 0px;top: 70px;left: 513px; position: fixed;" id="name" value="{{ort}}" disabled></input></td>
+                </tr>
+                <tr >
+                  
+                    <td  style="font-family: 'Signika', sans-serif;font-size: 12px;width: 200px;top: 87px;left: 293px; position: fixed;">Operator Name: </td>
+                    <td><input style="font-size: 12px;border: 0px;top: 87px;left: 393px; position: fixed;width: 170px;" id="name" value="{{data[2]}}" disabled></input></td>
+                    <td style="font-size: 12px;width: 100px;top: 87px;left: 483px; position: fixed;"> Date:
+                    <td><input style="font-size: 12px;border: 0px;top: 87px;left: 513px; position: fixed;" id="name" value="{{data[0]}}" disabled></input></td>
+                    
+                    <td></td>
+                </tr>
+              
+            
+               
+            </table>
+           
+        </div>  
+    </center>
+        <br>
+        <br>
+        <div  style="font-family: 'Signika', sans-serif;font-size: 10px;font-weight: bold; height: 70px;width:450px ;float: left;position: fixed;top: 110px;left:264px;">
+           <div style="height: 20px;width: 21px;border: 1px solid black;float: left;background-color:lightgray;">Sr.<br> No</div>
+           <div style="height: 20px;width: 230px;border: 1px solid black;float: left;background-color:lightgray;">PARTICULARS</div>
+    
+           <div style="height: 20px;width: 60px;border: 1px solid black;float: left;background-color:lightgray;">QUANTITY</div>
+           <div style="height: 20px;width: 115px;border: 1px solid black;float: left;background-color:lightgray;">REMARKS</div>
+          
+           <div style="height: 150px;width:21px ;float: left;border: 1px solid black;">
+            {% for i in range(0,desc|length) %}
+            <textarea type="text" name=""   id="" value="{{i+1}}" style="width:20px;border: 0px;font-size: 15px; resize: none;height: 40px;" disabled>{{i+1}}</textarea>
+            {% endfor %}
+         </div >
+            <div style="height: 150px;width:230px ;float: left;border: 1px solid black;"> 
+                {% for i in desc %}
+                <textarea type="text" name=""  id="" value="" style="width:230px;border: 0px;font-size: 13px;resize: none;height: 40px;"  disabled>{{i}}</textarea>
+                {% endfor %}
+            </div >
+               
+                    <div style="height: 150px;width:60px ;float: left;border: 1px solid black;"> 
+                        {% for i in qt %}
+                        <textarea type="text" name=""  id="" value="{{i}}" style="width:60px;font-size: 15px;border: 0px;resize: none;height: 40px;" disabled >{{i}}</textarea>
+                        {% endfor %}
+                    </div >
+                    <div style="height: 150px;width:114px ;float: left;border: 1px solid black;"> 
+                        {% for i in rm %}
+                        <textarea type="text" name=""  id="" value="{{i}}" style="width:112px;font-size: 15px;border: 0px;resize: none;height: 40px;" disabled >{{i}}</textarea>
+                        {% endfor %}
+                    </div >
+                      
+                                
+
+
+    </div>   
+
+   
+        
+        
+    </div>
+    
+</fieldset>
+</body>
+</html>

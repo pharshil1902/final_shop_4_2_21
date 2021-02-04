@@ -1,0 +1,137 @@
+{% block page_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Shop Management System</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='shop--v3.ico') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<!-- <link rel="icon" type="image/png" href="images/icons/favicon.ico"/> -->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }} ">
+	
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome.min.css') }}" >
+<!--===============================================================================================fonts/font-awesome-4.7.0/css/font-awesome.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='animate.css') }}">
+<!--===============================================================================================vendor/animate/animate.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='hamburgers.min.css') }}">
+<!--===============================================================================================vendor/css-hamburgers/hamburgers.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='animsition.min.css') }}">
+<!--===============================================================================================vendor/animsition/css/animsition.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='select2.min.css') }}">
+<!--===============================================================================================vendor/select2/select2.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='daterangepicker.css') }}">
+<!--===============================================================================================vendor/daterangepicker/daterangepicker.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='util.css') }}">
+	<!--css/util.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+	<script src="{{ url_for('static', filename='popper.js') }}"></script>
+	<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Regular.ttf') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Medium.ttf') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Bold.ttf') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-SemiBold.ttf') }}">
+	<!--css/main.css-->
+	<script src="{{ url_for('static', filename='actions.js') }}"></script>
+	<style>
+		
+@font-face {
+  font-family: Poppins-Regular;
+  src:url('../static/Poppins-Regular.ttf') ;  /*url('../fonts/poppins/Poppins-Regular.ttf');*/
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src:url('../static/Poppins-Medium.ttf');/*"{{ url_for('static', filename='Poppins-Medium.ttf') }}" url('../fonts/poppins/Poppins-Medium.ttf');*/
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src:url('../static/Poppins-Bold.ttf');
+  /*  "{{ url_for('static', filename='Poppins-Bold.ttf') }}"   url_for('../fonts/poppins/Poppins-Bold.ttf'); */
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src:url('../static/Poppins-SemiBold.ttf');
+  /*   "{{ url_for('static', filename='Poppins-SemiBold.ttf') }}"  url('../fonts/poppins/Poppins-SemiBold.ttf'); */
+}
+
+	</style>
+<!--===============================================================================================actions.js-->
+</head>
+<body>
+    <div class="container-contact100" align="center">
+        
+        <table>
+            <tr>
+                <form action="/admin_login">
+               <td> 
+                   <button type="submit"  class="wrap-contact100">Admin Login</button></td>
+                </form> 
+			</tr><br>
+			<tr>
+				<td style="height: 5px;"></td>
+			</tr>
+            <tr>
+                <form action="/operator_login">
+               <td> <button type="submit"  class="wrap-contact100"   >Operator Login</button> </td>
+            </form> 
+            </tr>
+        </table>
+            
+        
+        <br><br>
+     
+           
+        
+       
+    </div>
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+<!--===============================================================================================vendor/jquery/jquery-3.2.1.min.js-->
+	<script src="{{ url_for('static', filename='animsition.min.js') }}"></script>
+<!--===============================================================================================vendor/animsition/js/animsition.min.js-->
+	
+
+<!--==================================================================================vendor/bootstrap/js/bootstrap.min.js=============vendor/bootstrap/js/popper.js-->
+	<script src="{{ url_for('static', filename='select2.min.js') }}"></script>
+	<!--vendor/select2/select2.min.js-->
+	<script>
+		$(".selection-2").select2({
+			minimumResultsForSearch: 20,
+			dropdownParent: $('#dropDownSelect1')
+		});
+	</script>
+<!--===============================================================================================-->
+	<script src="{{ url_for('static', filename='moment.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='daterangepicker.js') }}"></script>
+<!--=====================================================================vendor/daterangepicker/moment.min.js==========================vendor/daterangepicker/daterangepicker.js-->
+	<script src="{{ url_for('static', filename='countdowntime.js') }}"></script>
+	<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+<!--===============================================================================================vendor/countdowntime/countdowntime.js-->
+	<script src="{{ url_for('static', filename='main.js') }}"></script>
+	<!--js/main.js-->
+
+	<!-- Global site tag (gtag.js) - Google Analytics---https://www.googletagmanager.com/gtag/js?id=UA-23581568-13 -->
+	<link rel="stylesheet" href="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13">
+<script async src="{{ font_url }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>
+{% endblock %}

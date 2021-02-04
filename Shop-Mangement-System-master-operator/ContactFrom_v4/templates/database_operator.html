@@ -1,0 +1,229 @@
+{% block page_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Shop Management System</title>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='shop--v3.ico') }}">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<!-- <link rel="icon" type="image/png" href="images/icons/favicon.ico"/> -->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.min.css') }} ">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }} ">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='font-awesome.min.css') }}" >
+<!--===============================================================================================fonts/font-awesome-4.7.0/css/font-awesome.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='animate.css') }}">
+<!--===============================================================================================vendor/animate/animate.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='hamburgers.min.css') }}">
+<!--===============================================================================================vendor/css-hamburgers/hamburgers.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='animsition.min.css') }}">
+<!--===============================================================================================vendor/animsition/css/animsition.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='select2.min.css') }}">
+<!--===============================================================================================vendor/select2/select2.min.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='daterangepicker.css') }}">
+<!--===============================================================================================vendor/daterangepicker/daterangepicker.css-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='util.css') }}">
+	<!--css/util.css-->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+	<script src="{{ url_for('static', filename='popper.js') }}"></script>
+	<script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Regular.ttf') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Medium.ttf') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='Poppins-Bold.ttf') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='Poppins-SemiBold.ttf') }}">
+
+
+  <link rel="image" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+  <link rel="image" href="{{ url_for('static', filename='css/bootstrap.js') }}">
+  <link rel="image" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+  <link rel="image" href="{{ url_for('static', filename='css/bootstrap.min.js') }}">
+  <link rel="image" href="{{ url_for('static', filename='css/bootstrap-theme.css') }}">
+ 
+  <link rel="image" href="{{ url_for('static', filename='css/bootstrap-theme.min.css') }}">
+  <link rel="image" href="{{ url_for('static', filename='css/glyphicons-halflings-regular.eot') }}">
+  <link rel="image" href="{{ url_for('static', filename='css/glyphicons-halflings-regular.ttf') }}">
+  <link rel="image" href="{{ url_for('static', filename='css/glyphicons-halflings-regular.svg') }}">
+  <link rel="image" href="{{ url_for('static', filename='css/glyphicons-halflings-regular.woff') }}">
+	<!--css/main.css-->
+  <script src="{{ url_for('static', filename='actions.js') }}"></script>
+  <script src="{{url_for('static',filename='choicess.js')}}"></script>
+	<style>
+		
+@font-face {
+  font-family: Poppins-Regular;
+  src:url('../static/Poppins-Regular.ttf') ;  /*url('../fonts/poppins/Poppins-Regular.ttf');*/
+}
+
+@font-face {
+  font-family: Poppins-Medium;
+  src:url('../static/Poppins-Medium.ttf');/*"{{ url_for('static', filename='Poppins-Medium.ttf') }}" url('../fonts/poppins/Poppins-Medium.ttf');*/
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src:url('../static/Poppins-Bold.ttf');
+  /*  "{{ url_for('static', filename='Poppins-Bold.ttf') }}"   url_for('../fonts/poppins/Poppins-Bold.ttf'); */
+}
+
+@font-face {
+  font-family: Poppins-SemiBold;
+  src:url('../static/Poppins-SemiBold.ttf');
+  /*   "{{ url_for('static', filename='Poppins-SemiBold.ttf') }}"  url('../fonts/poppins/Poppins-SemiBold.ttf'); */
+}
+
+	</style>
+<!--===============================================================================================actions.js-->
+</head>
+<body>
+  <div class="container-contact100" >
+  
+    <div align:center style=" position: fixed;top: 15px;left: 5;width: 80%; " >
+        {% with messages = get_flashed_messages(category_filter=["category1"]) %}
+			{% if messages %}
+				{% for message in messages %}
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<span><strong>{{ message }}</strong></span>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+	</div>
+      <div class="wrap-contact100" style="width: 100%;">
+        
+          <table class="table table-hover " style="zoom:0.73;position:relative;left:-50px; ">
+            <tr class="table-dark">
+              <th>Entry Code</th>
+              <th>Date & Time</th>
+              <th>Operator/Admin</th>
+              <th>Company Name</th>
+              <th>DeliveryMan Name</th>
+              <th>Mobile Number</th>
+              <th>Description</th>
+              <th>Size</th>
+              <th>Media-type</th>
+              <th>Color</th>
+              <th>Duplex</th>
+              <th>Quantity</th>
+             
+              <th>ADD_SERVICE</th>
+            
+              <th>ADD_QUANTITY</th>
+              <th>REMARK</th>
+              
+         
+              
+            </tr>
+            {% block content %}
+              {% with queries = get_flashed_messages(category_filter=["category2"]) %}
+                {% if queries %}
+                  {% for row in queries  %}
+                      {% for j in range(0,row|length) %} 
+                        <tr>
+                          {% for i in range(0,row[j]|length) %} 
+                            <td>{{ row[j][i] }}</td>
+                          {% endfor %}
+                          <form  method="POST">
+                            <input type="text" style="display:none;" name="enc" id="" value="{{row[j][0]}}">
+                            <input type="text" style="display:none;" name="date" id="" value="{{row[j][1]}}">
+                            <input type="text" style="display:none;" name="operator" id="" value="{{row[j][2]}}">
+                            <input type="text" style="display:none;" name="c_name" id="" value="{{row[j][3]}}">
+                            <input type="text" style="display:none;" name="d_name" id="" value="{{row[j][4]}}">
+                            <input type="text" style="display:none;" name="mobile" id="" value="{{row[j][5]}}">
+                            <input type="text" style="display:none;" name="desc" id="" value="{{row[j][6]}}">
+                            <input type="text" style="display:none;"  name="size" id="" value="{{row[j][7]}}">
+                            <input type="text" style="display:none;" name="type" id="" value="{{row[j][8]}}">
+                            <input type="text" style="display:none;" name="color" id="" value="{{row[j][9]}}">
+                            <input type="text" style="display:none;" name="duplex" id="" value="{{row[j][10]}}">
+                            <input type="text" style="display:none;" name="qty" id="" value="{{row[j][11]}}">
+                            <input type="text" style="display:none;" name="add_service" id="" value="{{row[j][12]}}">
+                           
+                            <input type="text" style="display:none;" name="add_qty" id="" value="{{row[j][13]}}">
+                            <input type="text" style="display:none;" name="remark" id="" value="{{row[j][14]}}">
+                          <td><input href="" style="height: 35px;width: 50px;font-size: 20px;" type="submit" formaction="/edit_admin"  class="btn btn-warning btn-xs" value="Edit" ></input></td>
+                          <td><input href="" style="height: 35px;width: 50px;font-size: 20px;" type="submit" formaction="/print_delivery_ad" class="btn btn-warning btn-xs" value="DC" ></input></td>
+                        </form>
+                        </tr>
+                        
+                          
+                        {% endfor %} 
+                  {% endfor %}
+                {% endif %} 
+              {% endwith %}   
+
+
+            {% endblock %}
+          </table>
+          
+      </div>
+      <form action="/back_to_admin" method="POST" style="width: 800px; height: 1px;">
+        <div class="container-contact100-form-btn">
+          <div class="wrap-contact100-form-btn">
+            <div class="contact100-form-bgbtn"></div>
+            <button class="contact100-form-btn">
+              <span>
+                Back
+                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+              </span>
+            </button>
+            </div>
+          </div>
+          
+          </form>
+      </div>
+      
+    </div>
+  
+    </div>
+
+
+        <div id="dropDownSelect1"></div>
+
+        <!--===============================================================================================-->
+            <script src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+        <!--===============================================================================================vendor/jquery/jquery-3.2.1.min.js-->
+            <script src="{{ url_for('static', filename='animsition.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+        <!--===============================================================================================vendor/animsition/js/animsition.min.js-->
+            
+        
+        <!--==================================================================================vendor/bootstrap/js/bootstrap.min.js=============vendor/bootstrap/js/popper.js-->
+            <script src="{{ url_for('static', filename='select2.min.js') }}"></script>
+            <!--vendor/select2/select2.min.js-->
+            <script>
+                $(".selection-2").select2({
+                    minimumResultsForSearch: 20,
+                    dropdownParent: $('#dropDownSelect1')
+                });
+            </script>
+        <!--===============================================================================================-->
+            <script src="{{ url_for('static', filename='moment.min.js') }}"></script>
+            <script src="{{ url_for('static', filename='daterangepicker.js') }}"></script>
+        <!--=====================================================================vendor/daterangepicker/moment.min.js==========================vendor/daterangepicker/daterangepicker.js-->
+            <script src="{{ url_for('static', filename='countdowntime.js') }}"></script>
+        <!--===============================================================================================vendor/countdowntime/countdowntime.js-->
+            <script src="{{ url_for('static', filename='main.js') }}"></script>
+            <!--js/main.js-->
+        
+            <!-- Global site tag (gtag.js) - Google Analytics---https://www.googletagmanager.com/gtag/js?id=UA-23581568-13 -->
+            <link rel="stylesheet" href="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13">
+        <script async src="{{ font_url }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'UA-23581568-13');
+        </script>
+        
+        </body>
+        </html>
+        {% endblock %}        
